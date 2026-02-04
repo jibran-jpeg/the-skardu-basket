@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useProducts } from '../context/ProductContext';
 import { storeConfig } from '../store.config';
+import { getImageUrl } from '../utils/imageHelper';
 
 export function Navbar({ onMenuClick, onCartClick }) {
     const [scrolled, setScrolled] = useState(false);
@@ -162,7 +163,7 @@ export function Navbar({ onMenuClick, onCartClick }) {
                                                         }}
                                                         className="flex items-center gap-3 p-3 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors border-b last:border-none border-gray-100 dark:border-white/5"
                                                     >
-                                                        <img src={product.image} alt={product.name} className="w-10 h-10 rounded-lg object-cover bg-gray-100" />
+                                                        <img src={getImageUrl(product.image)} alt={product.name} className="w-10 h-10 rounded-lg object-cover bg-gray-100" />
                                                         <div className="flex-1 min-w-0">
                                                             <h4 className="text-sm font-bold text-gray-900 dark:text-white truncate">{product.name}</h4>
                                                             <p className="text-xs text-brand-primary dark:text-brand-accent font-medium">{storeConfig.currency}{product.price}</p>

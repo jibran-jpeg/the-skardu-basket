@@ -11,6 +11,7 @@ import { BestSeller } from '../components/BestSeller';
 import { Reviews } from '../components/Reviews';
 import { ChevronLeft, ChevronRight, Leaf } from 'lucide-react';
 import { useProducts } from '../context/ProductContext';
+import { getImageUrl } from '../utils/imageHelper';
 
 export function Home() {
     const { products, categories, loading } = useProducts();
@@ -165,7 +166,7 @@ export function Home() {
                                     {/* Full Background Image */}
                                     <div className="absolute inset-0">
                                         <img
-                                            src={product.image}
+                                            src={getImageUrl(product.image)}
                                             alt={product.name}
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                         />
@@ -260,7 +261,7 @@ export function Home() {
                                 <div className="relative group">
                                     <div className="absolute inset-0 bg-brand-accent rounded-[40px] rotate-3 group-hover:rotate-6 transition-transform duration-500"></div>
                                     <img
-                                        src={currentProduct.image}
+                                        src={getImageUrl(currentProduct.image)}
                                         alt={currentProduct.name}
                                         className="relative rounded-[40px] shadow-2xl border-4 border-white/20 w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-500"
                                     />

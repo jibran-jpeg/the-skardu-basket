@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mountain, Droplets, Sun } from 'lucide-react';
+import { getImageUrl } from '../utils/imageHelper';
 
 export function StorySection() {
     const [imageError, setImageError] = React.useState(false);
@@ -69,7 +70,7 @@ export function StorySection() {
                         <div className="relative z-10 rounded-[40px] overflow-hidden border-2 border-gray-200 dark:border-white/10 shadow-2xl transition-transform duration-700 h-[250px] md:h-[400px] w-full">
                             {!imageError ? (
                                 <img
-                                    src="/images/skardu_orchard_bloom.png" // AI Generated Orchard Image
+                                    src={getImageUrl('/images/skardu_orchard_bloom.png')} // AI Generated Orchard Image
                                     alt="Majestic Skardu Landscape"
                                     onError={() => setImageError(true)}
                                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"

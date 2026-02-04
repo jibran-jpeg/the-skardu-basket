@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Sparkles, ArrowRight } from 'lucide-react';
+import { getImageUrl } from '../utils/imageHelper';
 
 export function CategoryCard({ category, isActive }) {
     const navigate = useNavigate();
@@ -46,7 +47,7 @@ export function CategoryCard({ category, isActive }) {
 
             {/* Image */}
             <img
-                src={Array.isArray(category.image) ? (category.image[0] || '/images/placeholder.png') : (category.image || '/images/placeholder.png')}
+                src={getImageUrl(Array.isArray(category.image) ? (category.image[0] || '/images/placeholder.png') : (category.image || '/images/placeholder.png'))}
                 alt={category.name}
                 loading="lazy"
                 decoding="async"

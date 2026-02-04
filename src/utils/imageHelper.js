@@ -8,7 +8,17 @@
 export const getImageUrl = (path) => {
     if (!path) return '';
 
-    // If it's already a full URL (Supabase or external), return as is
+    // If path is a localhost URL (from development seeding), convert to relative
+    if (path.startsWith('http://localhost') || path.startsWith('http://127.0.0.1')) {
+        try {
+            const url = new URL(path);
+            path = url.pathname;
+        } catch (e) {
+            console.error('Error parsing localhost URL:', path);
+        }
+    }
+
+    // If it's a full URL (Supabase or external), return as is
     if (path.startsWith('http') || path.startsWith('blob:') || path.startsWith('data:')) {
         return path;
     }

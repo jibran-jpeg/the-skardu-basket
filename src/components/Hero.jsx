@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { storeConfig } from '../store.config';
 import { ChevronDown } from 'lucide-react';
+import { getImageUrl } from '../utils/imageHelper';
 
 export function Hero() {
     const bgRef = React.useRef(null);
@@ -58,7 +59,7 @@ export function Hero() {
                 className="absolute inset-0 w-full h-[120%] will-change-transform"
             >
                 <img
-                    src={storeConfig.heroImage}
+                    src={getImageUrl(storeConfig.heroImage)}
                     alt="Skardu Valley"
                     fetchpriority="high"
                     decoding="async"
