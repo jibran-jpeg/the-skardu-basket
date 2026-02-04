@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Star, Calendar, Sprout, Clock } from 'lucide-react';
 import { CartContext } from '../context/CartContext';
+import { getImageUrl } from '../utils/imageHelper';
 
 export function ProductCard({ product }) {
     const { addToCart } = useContext(CartContext);
@@ -75,7 +76,7 @@ export function ProductCard({ product }) {
                 {/* Image Container */}
                 <div className="relative overflow-hidden aspect-[4/5]">
                     <img
-                        src={product.image}
+                        src={getImageUrl(product.image)}
                         alt={product.name}
                         className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${!isAvailable ? 'grayscale-[0.3]' : ''}`}
                     />

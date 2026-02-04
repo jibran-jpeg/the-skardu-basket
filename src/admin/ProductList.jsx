@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { useProducts } from '../context/ProductContext';
 import { compressImageIfNeeded, getFileSizeKB } from '../utils/imageCompressor';
+import { getImageUrl } from '../utils/imageHelper';
 
 export function ProductList() {
     const { products, categories, addProduct, updateProduct, deleteProduct, loading } = useProducts();
@@ -301,7 +302,7 @@ export function ProductList() {
                                         <td className="px-8 py-5">
                                             <div className="flex items-center gap-4">
                                                 <div className="relative w-16 h-16 rounded-2xl overflow-hidden border border-gray-100 dark:border-white/10 bg-gray-100 dark:bg-white/5 group-hover:scale-105 transition-transform duration-500 shadow-sm group-hover:shadow-md">
-                                                    <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                                                    <img src={getImageUrl(product.image)} alt={product.name} className="w-full h-full object-cover" />
                                                 </div>
                                                 <div>
                                                     <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-1 font-serif group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors">{product.name}</h3>
@@ -380,7 +381,7 @@ export function ProductList() {
 
                             <div className="flex gap-4 mb-4 relative z-10">
                                 <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0 border border-gray-100 dark:border-white/5 shadow-sm">
-                                    <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                                    <img src={getImageUrl(product.image)} alt={product.name} className="w-full h-full object-cover" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <div className="flex justify-between items-start">
@@ -470,7 +471,7 @@ export function ProductList() {
                                                 {formData.image ? (
                                                     <>
                                                         <img
-                                                            src={formData.image}
+                                                            src={getImageUrl(formData.image)}
                                                             alt="Preview"
                                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:blur-sm opacity-90 group-hover:opacity-100"
                                                         />

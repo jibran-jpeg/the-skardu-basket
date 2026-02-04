@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { X, Minus, Plus, Trash2 } from 'lucide-react';
 import { CartContext } from '../context/CartContext';
+import { getImageUrl } from '../utils/imageHelper';
 
 export function CartDrawer({ isOpen, onClose }) {
     const { cartItems, removeFromCart, updateQuantity, getCartTotal } = useContext(CartContext);
@@ -52,7 +53,7 @@ export function CartDrawer({ isOpen, onClose }) {
                                 <div key={item.id} className="flex gap-6 group animate-fade-in-up">
                                     <div className="w-24 h-28 flex-shrink-0 bg-gray-50 dark:bg-white/5 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-white/10">
                                         <img
-                                            src={item.image}
+                                            src={getImageUrl(item.image)}
                                             alt={item.name}
                                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                         />

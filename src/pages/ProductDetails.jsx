@@ -9,6 +9,7 @@ import { StickyCart } from '../components/StickyCart';
 import { SEO } from '../components/SEO';
 import { ProductReviews } from '../components/ProductReviews';
 import { ArrowLeft, Shield, Truck, Mountain, Sun, Sprout, ShoppingBag, Check, Calendar } from 'lucide-react';
+import { getImageUrl } from '../utils/imageHelper';
 
 export function ProductDetails() {
     const { id } = useParams();
@@ -123,7 +124,7 @@ export function ProductDetails() {
                         <div className="relative aspect-square rounded-[30px] overflow-hidden shadow-2xl group mb-6">
                             <img
                                 key={currentImage || 'default'}
-                                src={currentImage || product.image}
+                                src={getImageUrl(currentImage || product.image)}
                                 alt={product.name}
                                 className="w-full h-full object-cover object-center transform transition-transform duration-700 group-hover:scale-110 animate-fade-in"
                             />
@@ -149,7 +150,7 @@ export function ProductDetails() {
                                             : 'border-transparent opacity-70 hover:opacity-100 hover:border-gray-300'
                                             }`}
                                     >
-                                        <img src={img} alt={`View ${idx + 1}`} className="w-full h-full object-cover" />
+                                        <img src={getImageUrl(img)} alt={`View ${idx + 1}`} className="w-full h-full object-cover" />
                                     </button>
                                 ))}
                             </div>
