@@ -87,7 +87,7 @@ export const ProductProvider = ({ children }) => {
                 origin: productData.origin,
                 badge: productData.badge,
                 is_new: productData.isNew || false,
-                is_organic: productData.isOrganic || false,
+                // is_organic removed
                 seasonal_status: productData.seasonalStatus,
                 harvest_date: productData.harvestDate || null,
                 highlights: productData.highlights || [],
@@ -147,7 +147,7 @@ export const ProductProvider = ({ children }) => {
                 origin: updatedProduct.origin,
                 badge: updatedProduct.badge,
                 is_new: updatedProduct.isNew,
-                is_organic: updatedProduct.isOrganic,
+                // is_organic removed
                 seasonal_status: updatedProduct.seasonalStatus,
                 harvest_date: updatedProduct.harvestDate,
                 highlights: updatedProduct.highlights,
