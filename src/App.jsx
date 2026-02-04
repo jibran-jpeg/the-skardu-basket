@@ -57,7 +57,7 @@ function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <Router>
+    <Router basename="/the-skardu-basket">
       <HelmetProvider>
         <ScrollToTop />
         <ScrollToTopButton />
