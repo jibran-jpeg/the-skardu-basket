@@ -87,12 +87,12 @@ export const ProductProvider = ({ children }) => {
                 origin: productData.origin,
                 badge: productData.badge,
                 is_new: productData.isNew || false,
-                // is_organic removed
+                is_organic: productData.isOrganic || false,
                 seasonal_status: productData.seasonalStatus,
                 harvest_date: productData.harvestDate || null,
                 highlights: productData.highlights || [],
                 long_description: productData.longDescription || '',
-                // harvest_process removed as it is not in schema
+                harvest_process: productData.harvestProcess || '',
                 variants: productData.variants && productData.variants.length > 0
                     ? productData.variants.map(v => ({ ...v, price: Number(v.price) }))
                     : []
@@ -147,12 +147,12 @@ export const ProductProvider = ({ children }) => {
                 origin: updatedProduct.origin,
                 badge: updatedProduct.badge,
                 is_new: updatedProduct.isNew,
-                // is_organic removed
+                is_organic: updatedProduct.isOrganic,
                 seasonal_status: updatedProduct.seasonalStatus,
                 harvest_date: updatedProduct.harvestDate,
                 highlights: updatedProduct.highlights,
                 long_description: updatedProduct.longDescription,
-                // harvest_process removed
+                harvest_process: updatedProduct.harvestProcess,
                 variants: updatedProduct.variants
             };
 
