@@ -3,6 +3,7 @@ import { useProducts } from '../context/ProductContext';
 import { Plus, Trash2, Save, X, UploadCloud, Folder, Grid, Database } from 'lucide-react';
 import { storeConfig } from '../store.config';
 import { supabase } from '../lib/supabase';
+import { getImageUrl } from '../utils/imageHelper';
 
 export function Settings() {
     const { categories, addCategory, updateCategory, deleteCategory } = useProducts();
@@ -261,7 +262,7 @@ export function Settings() {
                                     <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Cover Image</label>
                                     <div className="flex items-center gap-4">
                                         {formData.image && (
-                                            <img src={formData.image} alt="Preview" className="w-16 h-16 rounded-xl object-cover border border-gray-200 dark:border-white/10" />
+                                            <img src={getImageUrl(formData.image)} alt="Preview" className="w-16 h-16 rounded-xl object-cover border border-gray-200 dark:border-white/10" />
                                         )}
                                         <label className="flex items-center gap-2 px-4 py-3 bg-white dark:bg-[#151c24] border border-dashed border-gray-300 dark:border-white/20 rounded-xl cursor-pointer hover:border-brand-primary hover:text-brand-primary transition-all text-sm text-gray-500 dark:text-gray-400">
                                             <UploadCloud size={18} />
@@ -285,7 +286,7 @@ export function Settings() {
                             <div key={category.id} className="group p-5 bg-white/50 dark:bg-white/5 hover:bg-white dark:hover:bg-[#151c24] border border-gray-100 dark:border-white/5 rounded-3xl transition-all hover:shadow-xl hover:shadow-gray-200/50 dark:hover:shadow-black/50 hover:-translate-y-1 relative">
                                 <div className="flex items-start gap-4">
                                     <div className="w-16 h-16 rounded-2xl bg-gray-100 dark:bg-black/20 overflow-hidden shrink-0 border border-gray-200 dark:border-white/5">
-                                        <img src={category.image} alt={category.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        <img src={getImageUrl(category.image)} alt={category.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <h3 className="font-bold text-gray-900 dark:text-white font-serif">{category.name}</h3>

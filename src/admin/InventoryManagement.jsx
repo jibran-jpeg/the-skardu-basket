@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useProducts } from '../context/ProductContext';
+import { getImageUrl } from '../utils/imageHelper';
 import { Package, AlertTriangle, TrendingDown, Search, Plus, Minus, RefreshCw, FileDown } from 'lucide-react';
 
 export default function InventoryManagement() {
@@ -148,8 +149,8 @@ export default function InventoryManagement() {
                         <button
                             onClick={() => setFilterStatus('all')}
                             className={`px-4 py-2 rounded-xl font-medium transition-all ${filterStatus === 'all'
-                                    ? 'bg-brand-primary text-white'
-                                    : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
+                                ? 'bg-brand-primary text-white'
+                                : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
                                 }`}
                         >
                             All
@@ -157,8 +158,8 @@ export default function InventoryManagement() {
                         <button
                             onClick={() => setFilterStatus('low')}
                             className={`px-4 py-2 rounded-xl font-medium transition-all ${filterStatus === 'low'
-                                    ? 'bg-yellow-600 text-white'
-                                    : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
+                                ? 'bg-yellow-600 text-white'
+                                : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
                                 }`}
                         >
                             Low Stock
@@ -166,8 +167,8 @@ export default function InventoryManagement() {
                         <button
                             onClick={() => setFilterStatus('out')}
                             className={`px-4 py-2 rounded-xl font-medium transition-all ${filterStatus === 'out'
-                                    ? 'bg-red-600 text-white'
-                                    : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
+                                ? 'bg-red-600 text-white'
+                                : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
                                 }`}
                         >
                             Out of Stock
@@ -213,7 +214,7 @@ export default function InventoryManagement() {
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
                                                 <img
-                                                    src={product.image}
+                                                    src={getImageUrl(product.image)}
                                                     alt={product.name}
                                                     className="w-12 h-12 rounded-lg object-cover bg-gray-100 dark:bg-white/5"
                                                 />

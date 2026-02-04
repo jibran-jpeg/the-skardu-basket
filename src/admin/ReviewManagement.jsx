@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useProducts } from '../context/ProductContext';
+import { getImageUrl } from '../utils/imageHelper';
 import { Star, Check, X, MessageSquare, Loader2, Trash2, Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function ReviewManagement() {
@@ -254,7 +255,7 @@ export default function ReviewManagement() {
                                 <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-100 dark:border-white/5">
                                     {review.productImage && (
                                         <img
-                                            src={review.productImage}
+                                            src={getImageUrl(review.productImage)}
                                             alt={review.productName}
                                             className="w-12 h-12 rounded-lg object-cover"
                                         />
@@ -317,8 +318,8 @@ export default function ReviewManagement() {
                                         <button
                                             onClick={() => handleToggleFeatured(review.id, review.isFeatured)}
                                             className={`flex-1 py-2.5 px-4 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 ${review.isFeatured
-                                                    ? 'bg-brand-accent/20 text-brand-accent border-2 border-brand-accent'
-                                                    : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-brand-accent/10 border-2 border-transparent'
+                                                ? 'bg-brand-accent/20 text-brand-accent border-2 border-brand-accent'
+                                                : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-brand-accent/10 border-2 border-transparent'
                                                 }`}
                                         >
                                             ⭐ {review.isFeatured ? 'Featured' : 'Feature'}

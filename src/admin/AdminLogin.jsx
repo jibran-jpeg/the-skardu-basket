@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, Lock, ArrowRight, AlertCircle } from 'lucide-react';
 import { storeConfig } from '../store.config';
+import { getImageUrl } from '../utils/imageHelper';
 
 
 export function AdminLogin() {
@@ -41,7 +42,7 @@ export function AdminLogin() {
                         <div className="absolute inset-0 bg-brand-primary/30 blur-3xl rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-1000"></div>
                         <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary/20 to-brand-accent/20 rounded-full animate-spin-slow opacity-50"></div>
                         <img
-                            src="/images/skardu_basket_logo.png"
+                            src={getImageUrl('/images/skardu_basket_logo.png')}
                             alt="The Skardu Basket"
                             className="w-full h-full object-contain drop-shadow-2xl relative z-10 transform group-hover:scale-110 transition-transform duration-700 ease-out"
                         />
