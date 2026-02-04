@@ -92,7 +92,7 @@ export const ProductProvider = ({ children }) => {
                 harvest_date: productData.harvestDate || null,
                 highlights: productData.highlights || [],
                 long_description: productData.longDescription || '',
-                harvest_process: productData.harvestProcess || '',
+                // harvest_process removed as it is not in schema
                 variants: productData.variants && productData.variants.length > 0
                     ? productData.variants.map(v => ({ ...v, price: Number(v.price) }))
                     : []
@@ -152,7 +152,7 @@ export const ProductProvider = ({ children }) => {
                 harvest_date: updatedProduct.harvestDate,
                 highlights: updatedProduct.highlights,
                 long_description: updatedProduct.longDescription,
-                harvest_process: updatedProduct.harvestProcess,
+                // harvest_process removed
                 variants: updatedProduct.variants
             };
 
