@@ -5,6 +5,10 @@ import imgHero from '../assets/images/hero.png';
 import imgHands from '../assets/images/hands.png';
 import imgApricotDrying from '../assets/images/apricot-drying.png';
 import imgCertificate from '../assets/images/certificate.png';
+import imgHarvest from '../assets/images/harvest.png';
+import imgSunDry from '../assets/images/sun-dry.png';
+import imgVerify from '../assets/images/verify.png';
+import imgDeliver from '../assets/images/deliver.png';
 
 export function AboutUs() {
     // Scroll to top on mount
@@ -127,30 +131,41 @@ export function AboutUs() {
                     <div className="md:col-span-6 lg:col-span-12 overflow-x-auto pb-4 md:pb-0 scrollbar-hide snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0">
                         <div className="flex md:grid md:grid-cols-4 gap-3 min-w-[200%] md:min-w-0">
                             {[
-                                { icon: Mountain, title: "Harvest", desc: "Hand-picked at peak altitude." },
-                                { icon: Sun, title: "Sun-Dry", desc: "Naturally dried under glacial sun." },
-                                { icon: ShieldCheck, title: "Verify", desc: "Triple-checked for purity." },
-                                { icon: Package, title: "Deliver", desc: "Sealed with care, sent to you." },
+                                { icon: Mountain, title: "Harvest", desc: "Hand-picked at peak altitude.", image: imgHarvest },
+                                { icon: Sun, title: "Sun-Dry", desc: "Naturally dried under glacial sun.", image: imgSunDry },
+                                { icon: ShieldCheck, title: "Verify", desc: "Triple-checked for purity.", image: imgVerify },
+                                { icon: Package, title: "Deliver", desc: "Sealed with care, sent to you.", image: imgDeliver },
                             ].map((step, idx) => (
                                 <div key={idx} className="snap-center w-full relative">
-                                    <BentoCard className="h-full min-h-[180px] p-6 flex flex-col items-center justify-center text-center !bg-white dark:!bg-[#1F2833] border-stone-100 dark:border-white/5 hover:!border-brand-accent/30 transition-colors relative overflow-hidden group">
+                                    <BentoCard className="h-full min-h-[180px] p-0 flex flex-col items-center justify-center text-center bg-black border-stone-100 dark:border-white/5 hover:!border-brand-accent/30 transition-colors relative overflow-hidden group">
 
-                                        {/* 1. Large Ghost Number Background */}
-                                        <div className="absolute -right-4 -bottom-8 text-[120px] font-black text-gray-100 dark:text-white/5 opacity-50 select-none group-hover:text-brand-primary/10 transition-colors duration-500 font-serif leading-none">
-                                            0{idx + 1}
+                                        {/* Background Image & Overlay */}
+                                        <div className="absolute inset-0 z-0">
+                                            <img
+                                                src={step.image}
+                                                alt={step.title}
+                                                className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
                                         </div>
 
-                                        {/* 2. Main Icon (Centered) */}
-                                        <div className="relative z-10 w-14 h-14 mb-4 rounded-2xl bg-brand-primary/5 dark:bg-white/5 flex items-center justify-center border border-brand-primary/10 dark:border-white/10 group-hover:scale-110 transition-transform duration-500 shadow-lg group-hover:shadow-brand-accent/20">
-                                            <step.icon size={26} className="text-brand-primary dark:text-white" />
-                                        </div>
+                                        <div className="relative z-20 p-6 w-full h-full flex flex-col items-center justify-center">
+                                            {/* 1. Large Ghost Number Background */}
+                                            <div className="absolute -right-4 -bottom-8 text-[120px] font-black text-white/5 opacity-50 select-none group-hover:text-brand-primary/20 transition-colors duration-500 font-serif leading-none">
+                                                0{idx + 1}
+                                            </div>
 
-                                        {/* 3. Text Content */}
-                                        <div className="relative z-10">
-                                            <h4 className="text-lg font-bold font-serif text-gray-900 dark:text-white mb-1 group-hover:text-brand-accent transition-colors">{step.title}</h4>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium max-w-[120px] mx-auto leading-relaxed">{step.desc}</p>
-                                        </div>
+                                            {/* 2. Main Icon (Centered) */}
+                                            <div className="relative z-10 w-14 h-14 mb-4 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform duration-500 shadow-lg group-hover:shadow-brand-accent/20">
+                                                <step.icon size={26} className="text-white group-hover:text-brand-accent transition-colors" />
+                                            </div>
 
+                                            {/* 3. Text Content */}
+                                            <div className="relative z-10">
+                                                <h4 className="text-lg font-bold font-serif text-white mb-1 group-hover:text-brand-accent transition-colors">{step.title}</h4>
+                                                <p className="text-xs text-gray-300 font-medium max-w-[120px] mx-auto leading-relaxed group-hover:text-white transition-colors">{step.desc}</p>
+                                            </div>
+                                        </div>
                                     </BentoCard>
 
                                     {/* Connector Line (Desktop Only) */}
