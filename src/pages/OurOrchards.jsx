@@ -3,62 +3,66 @@ import { Link } from 'react-router-dom';
 import { Mountain, Cloud, Sun, ArrowRight, Heart, ShieldCheck, Leaf, ChevronDown } from 'lucide-react';
 import { storeConfig } from '../store.config';
 
+import imgSorting from '../assets/images/skardu_apricot_sorting_process_1769582130530.png';
+import imgHarvest from '../assets/images/orchard_harvest_basket_1769579947553.png';
+import imgDrying from '../assets/images/apricot_drying_rooftop_1769579924155.png';
+import imgCommunity from '../assets/images/skardu_farmers_harvest_1769580653731.png';
+import imgJars from '../assets/images/skardu_product_jars_landscape_1769582227259.png';
+import imgHeritage from '../assets/images/skardu_traditional_house_1769580633362.png';
+import imgCherry from '../assets/images/skardu_cherry_picking_process_1769598711436.png';
+import imgSortingWomen from '../assets/images/skardu_apricot_sorting_women_1769598744193.png';
+import imgDryingRocks from '../assets/images/skardu_apricot_drying_rocks_1769598772752.png';
+import imgHero from '../assets/images/skardu_orchard_hero_1769579902788.png';
+import imgSpring from '../assets/images/skardu_valley_spring_1769579971443.png';
+
 export function OurOrchards() {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    // Helper to resolve paths with base URL (handles deployment to subdirectories)
-    const resolvePath = (path) => {
-        const baseUrl = import.meta.env.BASE_URL;
-        // Remove leading slash from path if it exists to avoid double slashes with baseUrl
-        const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-        return `${baseUrl}${cleanPath}`;
-    };
-
     const galleryImages = [
         {
-            src: resolvePath("/images/skardu_apricot_sorting_process_1769582130530.png"),
+            src: imgSorting,
             title: "Art of Selection",
             subtitle: "Hand-Sorted Perfection"
         },
         {
-            src: resolvePath("/images/orchard_harvest_basket_1769579947553.png"),
+            src: imgHarvest,
             title: "Nature's Bounty",
             subtitle: "Fresh Harvest"
         },
         {
-            src: resolvePath("/images/apricot_drying_rooftop_1769579924155.png"),
+            src: imgDrying,
             title: "Sun-Kissed Goodness",
             subtitle: "Traditional Drying"
         },
         {
-            src: resolvePath("/images/skardu_farmers_harvest_1769580653731.png"),
+            src: imgCommunity,
             title: "Hand Picked with Love & Care",
             subtitle: "Our Community"
         },
         {
-            src: resolvePath("/images/skardu_product_jars_landscape_1769582227259.png"),
+            src: imgJars,
             title: "Pure & Jarred",
             subtitle: "Bottled Nature"
         },
         {
-            src: resolvePath("/images/skardu_traditional_house_1769580633362.png"),
+            src: imgHeritage,
             title: "Preserving Heritage",
             subtitle: "Ancient Architecture"
         },
         {
-            src: resolvePath("/images/skardu_cherry_picking_process_1769598711436.png"),
+            src: imgCherry,
             title: "Cherry Picking",
             subtitle: "Fresh from the Branch"
         },
         {
-            src: resolvePath("/images/skardu_apricot_sorting_women_1769598744193.png"),
+            src: imgSortingWomen,
             title: "Community Sorting",
             subtitle: "Traditional Process"
         },
         {
-            src: resolvePath("/images/skardu_apricot_drying_rocks_1769598772752.png"),
+            src: imgDryingRocks,
             title: "Natural Drying",
             subtitle: "Sun & Stone"
         }
@@ -70,7 +74,7 @@ export function OurOrchards() {
             <div className="relative h-[80vh] overflow-hidden flex items-center justify-center">
                 <div className="absolute inset-0">
                     <img
-                        src={resolvePath("/images/skardu_orchard_hero_1769579902788.png")}
+                        src={imgHero}
                         alt="Skardu Valley Orchards"
                         className="w-full h-full object-cover scale-105 animate-slow-zoom"
                     />
@@ -143,7 +147,7 @@ export function OurOrchards() {
                     <div className="relative">
                         <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl relative z-10 group">
                             <img
-                                src={resolvePath("/images/apricot_drying_rooftop_1769579924155.png")}
+                                src={imgDrying}
                                 alt="Drying Apricots on Stone Roof"
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             />
@@ -214,7 +218,7 @@ export function OurOrchards() {
                             <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand-accent/20 rounded-full blur-3xl"></div>
                             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-accent/20 rounded-full blur-3xl"></div>
                             <img
-                                src={resolvePath("/images/skardu_farmers_harvest_1769580653731.png")}
+                                src={imgCommunity}
                                 alt="Community Harvest"
                                 className="rounded-[40px] shadow-2xl relative z-10 rotate-2 hover:rotate-0 transition-all duration-700 border-4 border-white/10"
                             />
@@ -329,7 +333,7 @@ export function OurOrchards() {
             <section className="py-32 bg-brand-primary text-white text-center px-4 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20">
                     <img
-                        src={resolvePath("/images/skardu_valley_spring_1769579971443.png")}
+                        src={imgSpring}
                         alt="Background"
                         className="w-full h-full object-cover grayscale"
                     />
