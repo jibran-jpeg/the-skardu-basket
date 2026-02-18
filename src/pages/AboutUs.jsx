@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { Mountain, Heart, ShieldCheck, Leaf, Sun, Truck, Package, Droplets, Users, Wheat } from 'lucide-react';
 import { CompanyInfo } from '../components/CompanyInfo';
+import imgHero from '../assets/images/hero.png';
+import imgHands from '../assets/images/hands.png';
+import imgApricotDrying from '../assets/images/apricot-drying.png';
+import imgCertificate from '../assets/images/certificate.png';
 
 export function AboutUs() {
     // Scroll to top on mount
@@ -62,7 +66,7 @@ export function AboutUs() {
             <div className="relative h-[45vh] min-h-[380px] flex items-end justify-center pb-32 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="/assets/hero.png"
+                        src={imgHero}
                         alt="Skardu Valley"
                         className="w-full h-full object-cover scale-105 animate-slow-zoom"
                     />
@@ -96,7 +100,7 @@ export function AboutUs() {
                         </div>
                         <div className="w-full md:w-[45%] h-64 md:h-auto relative overflow-hidden order-1 md:order-2">
                             <img
-                                src="/assets/hands.png"
+                                src={imgHands}
                                 alt="Farmer Hands"
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                             />
@@ -162,7 +166,7 @@ export function AboutUs() {
                     <BentoCard className="md:col-span-3 lg:col-span-4 min-h-[300px] relative group" subtitle="Process">
                         <div className="absolute inset-0">
                             <img
-                                src="/assets/apricot-drying.png"
+                                src={imgApricotDrying}
                                 onError={(e) => {
                                     e.target.onerror = null;
                                     e.target.src = "https://images.unsplash.com/photo-1595133642398-3f456185675e?q=80&w=1000&auto=format&fit=crop";
@@ -211,7 +215,7 @@ export function AboutUs() {
                         <div className="hidden md:block w-1/2 h-full absolute right-0 top-0 bottom-0 overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-r from-white dark:from-[#1A1D23] to-transparent z-10"></div>
                             <img
-                                src="/assets/certificate.png"
+                                src={imgCertificate}
                                 alt="Organic Certificate Seal"
                                 className="w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-3"
                             />
@@ -221,7 +225,7 @@ export function AboutUs() {
 
                         {/* Mobile Fallback Background */}
                         <div className="md:hidden absolute inset-0 opacity-10 pointer-events-none">
-                            <img src="/assets/certificate.png" className="w-full h-full object-cover" />
+                            <img src={imgCertificate} className="w-full h-full object-cover" />
                         </div>
 
                     </BentoCard>
