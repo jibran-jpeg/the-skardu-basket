@@ -8,49 +8,57 @@ export function OurOrchards() {
         window.scrollTo(0, 0);
     }, []);
 
+    // Helper to resolve paths with base URL (handles deployment to subdirectories)
+    const resolvePath = (path) => {
+        const baseUrl = import.meta.env.BASE_URL;
+        // Remove leading slash from path if it exists to avoid double slashes with baseUrl
+        const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+        return `${baseUrl}${cleanPath}`;
+    };
+
     const galleryImages = [
         {
-            src: "/images/skardu_apricot_sorting_process_1769582130530.png",
+            src: resolvePath("/images/skardu_apricot_sorting_process_1769582130530.png"),
             title: "Art of Selection",
             subtitle: "Hand-Sorted Perfection"
         },
         {
-            src: "/images/orchard_harvest_basket_1769579947553.png",
+            src: resolvePath("/images/orchard_harvest_basket_1769579947553.png"),
             title: "Nature's Bounty",
             subtitle: "Fresh Harvest"
         },
         {
-            src: "/images/apricot_drying_rooftop_1769579924155.png",
+            src: resolvePath("/images/apricot_drying_rooftop_1769579924155.png"),
             title: "Sun-Kissed Goodness",
             subtitle: "Traditional Drying"
         },
         {
-            src: "/images/skardu_farmers_harvest_1769580653731.png",
+            src: resolvePath("/images/skardu_farmers_harvest_1769580653731.png"),
             title: "Hand Picked with Love & Care",
             subtitle: "Our Community"
         },
         {
-            src: "/images/skardu_product_jars_landscape_1769582227259.png",
+            src: resolvePath("/images/skardu_product_jars_landscape_1769582227259.png"),
             title: "Pure & Jarred",
             subtitle: "Bottled Nature"
         },
         {
-            src: "/images/skardu_traditional_house_1769580633362.png",
+            src: resolvePath("/images/skardu_traditional_house_1769580633362.png"),
             title: "Preserving Heritage",
             subtitle: "Ancient Architecture"
         },
         {
-            src: "/images/skardu_cherry_picking_process_1769598711436.png",
+            src: resolvePath("/images/skardu_cherry_picking_process_1769598711436.png"),
             title: "Cherry Picking",
             subtitle: "Fresh from the Branch"
         },
         {
-            src: "/images/skardu_apricot_sorting_women_1769598744193.png",
+            src: resolvePath("/images/skardu_apricot_sorting_women_1769598744193.png"),
             title: "Community Sorting",
             subtitle: "Traditional Process"
         },
         {
-            src: "/images/skardu_apricot_drying_rocks_1769598772752.png",
+            src: resolvePath("/images/skardu_apricot_drying_rocks_1769598772752.png"),
             title: "Natural Drying",
             subtitle: "Sun & Stone"
         }
@@ -62,7 +70,7 @@ export function OurOrchards() {
             <div className="relative h-[80vh] overflow-hidden flex items-center justify-center">
                 <div className="absolute inset-0">
                     <img
-                        src="/images/skardu_orchard_hero_1769579902788.png"
+                        src={resolvePath("/images/skardu_orchard_hero_1769579902788.png")}
                         alt="Skardu Valley Orchards"
                         className="w-full h-full object-cover scale-105 animate-slow-zoom"
                     />
@@ -112,19 +120,19 @@ export function OurOrchards() {
 
                         <div className="grid grid-cols-3 gap-6 pt-4">
                             <div className="group text-center p-6 bg-white dark:bg-[#1F2833] rounded-2xl shadow-lg hover:shadow-xl dark:shadow-none border border-gray-100 dark:border-white/5 transition-all duration-300 hover:-translate-y-1">
-                                <div className="w-12 h-12 bg-brand-accent/10 dark:bg-brand-accent/20 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                <div className="w-12 h-1 bg-brand-accent/10 dark:bg-brand-accent/20 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                                     <Mountain className="w-6 h-6 text-brand-accent" />
                                 </div>
                                 <span className="text-xs uppercase tracking-wider font-bold text-gray-500 dark:text-gray-400">7,500ft Altitude</span>
                             </div>
                             <div className="group text-center p-6 bg-white dark:bg-[#1F2833] rounded-2xl shadow-lg hover:shadow-xl dark:shadow-none border border-gray-100 dark:border-white/5 transition-all duration-300 hover:-translate-y-1">
-                                <div className="w-12 h-12 bg-brand-accent/10 dark:bg-brand-accent/20 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                <div className="w-12 h-1 bg-brand-accent/10 dark:bg-brand-accent/20 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                                     <Cloud className="w-6 h-6 text-brand-accent" />
                                 </div>
                                 <span className="text-xs uppercase tracking-wider font-bold text-gray-500 dark:text-gray-400">Pure Air</span>
                             </div>
                             <div className="group text-center p-6 bg-white dark:bg-[#1F2833] rounded-2xl shadow-lg hover:shadow-xl dark:shadow-none border border-gray-100 dark:border-white/5 transition-all duration-300 hover:-translate-y-1">
-                                <div className="w-12 h-12 bg-brand-accent/10 dark:bg-brand-accent/20 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                <div className="w-12 h-1 bg-brand-accent/10 dark:bg-brand-accent/20 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                                     <Sun className="w-6 h-6 text-brand-accent" />
                                 </div>
                                 <span className="text-xs uppercase tracking-wider font-bold text-gray-500 dark:text-gray-400">Sun Dried</span>
@@ -135,7 +143,7 @@ export function OurOrchards() {
                     <div className="relative">
                         <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl relative z-10 group">
                             <img
-                                src="/images/apricot_drying_rooftop_1769579924155.png"
+                                src={resolvePath("/images/apricot_drying_rooftop_1769579924155.png")}
                                 alt="Drying Apricots on Stone Roof"
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             />
@@ -206,7 +214,7 @@ export function OurOrchards() {
                             <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand-accent/20 rounded-full blur-3xl"></div>
                             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-accent/20 rounded-full blur-3xl"></div>
                             <img
-                                src="/images/skardu_farmers_harvest_1769580653731.png"
+                                src={resolvePath("/images/skardu_farmers_harvest_1769580653731.png")}
                                 alt="Community Harvest"
                                 className="rounded-[40px] shadow-2xl relative z-10 rotate-2 hover:rotate-0 transition-all duration-700 border-4 border-white/10"
                             />
@@ -321,7 +329,7 @@ export function OurOrchards() {
             <section className="py-32 bg-brand-primary text-white text-center px-4 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20">
                     <img
-                        src="/images/skardu_valley_spring_1769579971443.png"
+                        src={resolvePath("/images/skardu_valley_spring_1769579971443.png")}
                         alt="Background"
                         className="w-full h-full object-cover grayscale"
                     />
