@@ -19,8 +19,8 @@ export function Hero() {
             if (scrollY > window.innerHeight) return;
 
             rafId = requestAnimationFrame(() => {
-                // Parallax Background - Desktop Only to prevent mobile stutter
-                if (bgRef.current && window.innerWidth >= 768) {
+                // Parallax Background - Enable on all devices
+                if (bgRef.current) {
                     bgRef.current.style.transform = `translate3d(0, ${scrollY * 0.5}px, 0)`;
                 }
 
@@ -30,8 +30,8 @@ export function Hero() {
                     const scale = Math.max(1 - scrollY / 2000, 0.9);
                     const translateY = scrollY * 0.3;
 
-                    // On mobile, reduce the translation distance or disable it for smoother feel
-                    const effectiveTranslateY = window.innerWidth >= 768 ? translateY : translateY * 0.5;
+                    // Consistent translation for both mobile and desktop
+                    const effectiveTranslateY = translateY;
 
                     contentRef.current.style.opacity = opacity;
                     contentRef.current.style.transform = `translate3d(0, ${effectiveTranslateY}px, 0) scale(${scale})`;
