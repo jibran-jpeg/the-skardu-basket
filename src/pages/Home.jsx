@@ -32,11 +32,17 @@ export function Home() {
 
     useEffect(() => {
         if (isMobile) {
+            let timeoutId;
+
             const observer = new IntersectionObserver(
                 (entries) => {
                     entries.forEach((entry) => {
                         if (entry.isIntersecting) {
-                            setActiveCategory(Number(entry.target.dataset.index));
+                            // Debounce the state update to prevent rapid re-renders during fast scroll
+                            clearTimeout(timeoutId);
+                            timeoutId = setTimeout(() => {
+                                setActiveCategory(Number(entry.target.dataset.index));
+                            }, 100); // 100ms debounce
                         }
                     });
                 },
@@ -48,6 +54,7 @@ export function Home() {
             });
 
             return () => {
+                clearTimeout(timeoutId);
                 categoryCardsRef.current.forEach((card) => {
                     if (card) observer.unobserve(card);
                 });

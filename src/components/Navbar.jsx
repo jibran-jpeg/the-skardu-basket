@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, Search, User, ShoppingBag, Sun, Moon, X, Heart } from 'lucide-react';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
@@ -44,13 +45,20 @@ export function Navbar({ onMenuClick, onCartClick }) {
     // If we ARE on an overlay page, only show scrolled style when actually scrolled
     const showScrolledStyle = !isOverlayPage || scrolled;
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+
+    // Optimize scroll listener using Framer Motion to prevent main thread blocking
+    const { scrollY } = useScroll();
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const isScrolled = latest > 20;
+        setScrolled(prev => {
+            if (prev !== isScrolled) {
+                return isScrolled;
+            }
+            return prev;
+        });
+    });
+
 
     return (
         <nav className={`fixed top-0 z-[80] w-full transition-all duration-500 ease-in-out ${showScrolledStyle ? 'bg-white/70 dark:bg-[#0B0C10]/70 backdrop-blur-xl shadow-md' : 'bg-transparent'} `}>
