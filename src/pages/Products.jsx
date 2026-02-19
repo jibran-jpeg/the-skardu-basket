@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { ProductGrid } from '../components/ProductGrid';
+import { SEO } from '../components/SEO';
 
 export function Products() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -18,6 +19,7 @@ export function Products() {
 
     return (
         <div className="pt-32 pb-20 relative overflow-hidden min-h-screen">
+            <SEO title="Products" description="Shop premium organic dry fruits, Shilajit, fresh cherries, apricots, and more from the pristine valleys of Skardu. Free delivery across Pakistan." url="/products" keywords="buy organic dry fruits, Skardu apricots, Shilajit, walnuts, almonds, cherries, Pakistan" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-16 animate-fade-in-down">
                     <span className="inline-block py-1 px-3 rounded-full bg-brand-primary/5 dark:bg-white/5 border border-brand-primary/10 dark:border-white/10 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-[0.2em] uppercase mb-6 backdrop-blur-sm">

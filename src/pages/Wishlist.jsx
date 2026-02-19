@@ -6,6 +6,7 @@ import { ProductCard } from '../components/ProductCard';
 import { Link } from 'react-router-dom';
 import { Heart, ArrowLeft, Trash2, ShoppingBag } from 'lucide-react';
 import { storeConfig } from '../store.config';
+import { SEO } from '../components/SEO';
 
 export function Wishlist() {
     const { wishlist, toggleWishlist } = useWishlist();
@@ -66,6 +67,7 @@ export function Wishlist() {
 
     return (
         <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <SEO title="My Wishlist" description="Your saved products from The Skardu Basket." url="/wishlist" noindex={true} />
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-8 border-b border-gray-200 dark:border-gray-800">
                 <div>
                     <h1 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 dark:text-[#F5F5F5] mb-2">

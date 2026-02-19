@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { SEO } from '../components/SEO';
 import { Mountain, Heart, ShieldCheck, Leaf, Sun, Truck, Package, Droplets, Users, Wheat } from 'lucide-react';
 import { CompanyInfo } from '../components/CompanyInfo';
 import imgHero from '../assets/images/hero.png';
@@ -59,6 +60,7 @@ export function AboutUs() {
 
     return (
         <div className="bg-stone-50 dark:bg-[#0B0C10] min-h-screen pb-20 overflow-hidden selection:bg-brand-accent selection:text-white">
+            <SEO title="About Us" description="Learn about The Skardu Basket — our mission to bring pure, organic Himalayan products from Skardu, Gilgit-Baltistan to your doorstep. Sustainably harvested, 100% organic." url="/about" keywords="Skardu, about us, organic farming, Gilgit-Baltistan, Himalayan products, sustainable" />
 
             {/* Ambient Background Glows */}
             <div className="fixed inset-0 pointer-events-none">

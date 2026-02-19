@@ -1,0 +1,13 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://jibran-jpeg.github.io/the-skardu-basket/sitemap.xml
+
+# Disallow admin pages
+Disallow: /the-skardu-basket/admin/
+Disallow: /the-skardu-basket/login
+Disallow: /the-skardu-basket/signup
+Disallow: /the-skardu-basket/profile
+Disallow: /the-skardu-basket/checkout

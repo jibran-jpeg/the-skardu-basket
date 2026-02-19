@@ -4,6 +4,7 @@ import { CartContext } from '../context/CartContext';
 import { useOrders } from '../context/OrderContext';
 import confetti from 'canvas-confetti';
 import { CheckCircle, ShieldCheck, Truck, Package, ArrowRight, AlertCircle, CreditCard, ShoppingBag } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export function Checkout() {
     const { cartItems, getCartTotal, clearCart } = useContext(CartContext);
@@ -220,6 +221,7 @@ export function Checkout() {
 
     return (
         <div className="min-h-screen pt-32 pb-20 bg-gray-50 dark:bg-[#0B0C10]">
+            <SEO title="Checkout" description="Complete your purchase at The Skardu Basket." url="/checkout" noindex={true} />
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="mb-10 text-center md:text-left">

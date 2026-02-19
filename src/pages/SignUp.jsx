@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, User, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export function SignUp() {
     const { signUp, signInWithGoogle } = useAuth();
@@ -53,6 +54,7 @@ export function SignUp() {
 
     return (
         <div className="min-h-screen pt-32 pb-12 flex items-center justify-center px-4">
+            <SEO title="Create Account" description="Join The Skardu Basket — create your account to shop organic Himalayan products." url="/signup" noindex={true} />
             <div className="max-w-md w-full glass-panel p-8 md:p-10 space-y-8 animate-fade-in-up">
                 <div className="text-center">
                     <h2 className="text-3xl font-serif font-bold text-brand-primary dark:text-white mb-2">Create Account</h2>

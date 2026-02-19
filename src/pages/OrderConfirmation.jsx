@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useOrders } from '../context/OrderContext';
 import { CheckCircle, Package, Mail, Phone, MapPin, Calendar, CreditCard, Truck, Loader2, AlertCircle, ArrowRight, Home } from 'lucide-react';
+import { SEO } from '../components/SEO';
 import confetti from 'canvas-confetti';
 
 export function OrderConfirmation() {
@@ -97,6 +98,7 @@ export function OrderConfirmation() {
 
     return (
         <div className="min-h-screen pt-32 pb-12 bg-gray-50 dark:bg-[#0B0C10] px-4">
+            <SEO title="Order Confirmed" description="Your order has been confirmed at The Skardu Basket." noindex={true} />
             <div className="max-w-3xl mx-auto">
                 {/* Success Header */}
                 <div className="bg-white dark:bg-[#1F2833] rounded-3xl p-8 md:p-12 text-center mb-8 shadow-lg border border-gray-100 dark:border-white/5">

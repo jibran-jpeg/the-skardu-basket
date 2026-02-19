@@ -3,6 +3,7 @@ import { User, Package, MapPin, CreditCard, LogOut, ChevronRight, Edit2, X, Aler
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
+import { SEO } from '../components/SEO';
 
 export function Profile() {
     const { user, loading, logout, updateProfile } = useAuth();
@@ -110,6 +111,7 @@ export function Profile() {
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
+            <SEO title="My Account" description="Manage your account at The Skardu Basket." url="/profile" noindex={true} />
             <h1 className="text-4xl md:text-5xl font-serif text-brand-primary dark:text-gray-100 font-bold mb-10 text-center md:text-left">
                 My Account
             </h1>

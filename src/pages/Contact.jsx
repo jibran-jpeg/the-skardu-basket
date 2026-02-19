@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, MessageCircle } from 'lucide-react';
 import { storeConfig } from '../store.config';
+import { SEO } from '../components/SEO';
 
 export function Contact() {
     const [formData, setFormData] = useState({
@@ -27,6 +28,7 @@ export function Contact() {
 
     return (
         <div className="min-h-screen pt-24 pb-12 bg-gray-50 dark:bg-[#0B0C10]">
+            <SEO title="Contact Us" description="Get in touch with The Skardu Basket. Located in Skardu, Gilgit-Baltistan. Call, email, or WhatsApp us for questions about organic products and orders." url="/contact" keywords="contact Skardu Basket, Pakistan organic store, customer support, WhatsApp order" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-16">

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { SEO } from '../components/SEO';
 import { Link } from 'react-router-dom';
 import { Mountain, Cloud, Sun, ArrowRight, Heart, ShieldCheck, Leaf, ChevronDown } from 'lucide-react';
 import { storeConfig } from '../store.config';
@@ -70,6 +71,7 @@ export function OurOrchards() {
 
     return (
         <div className="bg-[#F9F8F4] dark:bg-[#0B0C10] transition-colors duration-300 min-h-screen">
+            <SEO title="Our Orchards" description="Discover our orchards in Skardu at 7,500ft altitude — where pure air, glacial water, and ancient farming traditions produce the finest organic fruits in Pakistan." url="/our-orchards" keywords="Skardu orchards, organic farming, Himalayan fruit, altitude farming, Gilgit-Baltistan" />
             {/* Hero Section */}
             <div className="relative h-[80vh] overflow-hidden flex items-center justify-center">
                 <div className="absolute inset-0">

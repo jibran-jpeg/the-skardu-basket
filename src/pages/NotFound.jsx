@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home, Compass, MapPin } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export function NotFound() {
     return (
         <div className="min-h-screen bg-[#F9F8F4] dark:bg-[#0B0C10] flex items-center justify-center p-4 relative overflow-hidden">
+            <SEO title="Page Not Found" description="The page you're looking for doesn't exist." noindex={true} />
             {/* Background Elements */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-brand-primary/10 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-accent/10 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2"></div>
