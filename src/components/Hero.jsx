@@ -8,6 +8,15 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 export function Hero() {
     const containerRef = useRef(null);
 
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     // 1. SCROLL PHYSICS
     // Track scroll progress relative to this container
     const { scrollYProgress } = useScroll({
@@ -31,6 +40,10 @@ export function Hero() {
     const scale = useTransform(smoothProgress, [0, 1], [1, 1.15]); // Zoom: scales up slightly
     const opacity = useTransform(smoothProgress, [0, 0.5], [1, 0]); // Fade: disappears halfway through
 
+    // Mobile Optimization: Static values
+    const mobileStyle = { y: 0, scale: 1, opacity: 1 };
+    const desktopStyle = { y, scale, opacity };
+
     return (
         <div ref={containerRef} className="relative w-full h-[100dvh] overflow-hidden bg-gray-900">
             {/* 
@@ -39,7 +52,7 @@ export function Hero() {
                 - transform-gpu: Ensures 3D transform usage for hardware acceleration.
             */}
             <motion.div
-                style={{ y, scale }}
+                style={isMobile ? { y: 0, scale: 1 } : { y, scale }}
                 className="absolute inset-0 w-full h-[120%] will-change-transform transform-gpu"
             >
                 <img
@@ -53,7 +66,7 @@ export function Hero() {
 
             {/* Gradient Overlay - Moves with background for consistency */}
             <motion.div
-                style={{ y }}
+                style={isMobile ? { y: 0 } : { y }}
                 className="absolute inset-0 h-[120%] bg-gradient-to-b from-black/20 via-black/10 to-black/40 pointer-events-none"
             />
 
@@ -72,7 +85,7 @@ export function Hero() {
                 - backface-visibility-hidden: Hack to ensure layer promotion.
             */}
             <motion.div
-                style={{ opacity }}
+                style={isMobile ? { opacity: 1 } : { opacity }}
                 className="relative z-20 h-full flex flex-col justify-center items-center text-center px-4 backface-visibility-hidden"
             >
                 {/* Top Badge */}
