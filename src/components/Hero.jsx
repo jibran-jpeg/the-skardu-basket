@@ -5,7 +5,7 @@ import { ChevronDown } from 'lucide-react';
 import { getImageUrl } from '../utils/imageHelper';
 
 export function Hero() {
-    const bgRef = React.useRef(null);
+    // const bgRef = React.useRef(null); // Removed for CSS parallax
     const contentRef = React.useRef(null);
     const scrollLabelRef = React.useRef(null);
 
@@ -19,10 +19,7 @@ export function Hero() {
             if (scrollY > window.innerHeight) return;
 
             rafId = requestAnimationFrame(() => {
-                // Parallax Background - Enable on all devices
-                if (bgRef.current) {
-                    bgRef.current.style.transform = `translate3d(0, ${scrollY * 0.5}px, 0)`;
-                }
+                // Parallax Background - CSS handled now (fixed position)
 
                 // Content Effects (Fade & Scale)
                 if (contentRef.current) {
@@ -54,10 +51,8 @@ export function Hero() {
     return (
         <div className="relative w-full h-[100dvh] overflow-hidden bg-gray-900">
             {/* Background Image with Parallax */}
-            <div
-                ref={bgRef}
-                className="absolute inset-0 w-full h-[120%] will-change-transform"
-            >
+            {/* Background Image with CSS Fixed Parallax */}
+            <div className="fixed inset-0 w-full h-[100dvh] z-0">
                 <img
                     src={getImageUrl(storeConfig.heroImage)}
                     alt="Skardu Valley"
@@ -67,8 +62,8 @@ export function Hero() {
                 />
             </div>
 
-            {/* Enhanced Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/40 pointer-events-none"></div>
+            {/* Enhanced Gradient Overlay - Fixed with image */}
+            <div className="fixed inset-0 h-[100dvh] bg-gradient-to-b from-black/20 via-black/10 to-black/40 pointer-events-none z-0"></div>
 
             {/* Decorative corner elements - Static to reduce paint cost or include in contentRef if needed to fade */}
             <div className="absolute top-0 left-0 w-16 h-16 md:w-32 md:h-32 border-t-2 border-l-2 border-white/20 pointer-events-none"></div>
