@@ -1,6 +1,7 @@
 
 /**
  * Helper function to resolve image paths for GitHub Pages deployment.
+ * Automatically serves WebP versions of PNG files for better performance.
  * 
  * @param {string} path - The image path from the database/state
  * @returns {string} - The resolved path including the base URL if necessary
@@ -21,6 +22,12 @@ export const getImageUrl = (path) => {
     // If it's a full URL (Supabase or external), return as is
     if (path.startsWith('http') || path.startsWith('blob:') || path.startsWith('data:')) {
         return path;
+    }
+
+    // Auto-serve WebP: replace .png extension with .webp for smaller file sizes
+    // All PNGs have been pre-converted to WebP alongside the originals
+    if (path.endsWith('.png')) {
+        path = path.replace(/\.png$/, '.webp');
     }
 
     // If it's a relative path stored in public folder

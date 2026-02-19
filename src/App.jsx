@@ -55,6 +55,13 @@ const PageLoader = () => (
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <Router basename="/the-skardu-basket">
@@ -69,12 +76,14 @@ function App() {
                   <OrderProvider>
                     <CartProvider>
                       <QuickViewProvider>
-                        <div className="min-h-screen bg-gradient-to-b from-white to-[#ECEBE4] dark:from-[#0B0C10] dark:to-[#1A1D23] font-sans selection:bg-brand-accent selection:text-white relative transition-colors duration-300">
-                          {/* Global Decorative background elements */}
-                          <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-                            <div className="absolute top-20 right-20 w-80 h-80 bg-brand-primary dark:bg-brand-accent rounded-full blur-3xl opacity-10 dark:opacity-10"></div>
-                            <div className="absolute bottom-20 left-20 w-96 h-96 bg-brand-primary dark:bg-brand-accent rounded-full blur-3xl opacity-10 dark:opacity-10"></div>
-                          </div>
+                        <div className="min-h-screen bg-gradient-to-b from-white to-[#ECEBE4] dark:from-[#0B0C10] dark:to-[#1A1D23] font-sans selection:bg-brand-accent selection:text-white relative">
+                          {/* Global Decorative background elements — DESKTOP ONLY */}
+                          {!isMobile && (
+                            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+                              <div className="absolute top-20 right-20 w-80 h-80 bg-brand-primary dark:bg-brand-accent rounded-full blur-3xl opacity-10 dark:opacity-10"></div>
+                              <div className="absolute bottom-20 left-20 w-96 h-96 bg-brand-primary dark:bg-brand-accent rounded-full blur-3xl opacity-10 dark:opacity-10"></div>
+                            </div>
+                          )}
 
                           <div className="relative z-10 flex flex-col min-h-screen">
                             <main className="flex-grow">
