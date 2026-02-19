@@ -105,7 +105,7 @@ export function Home() {
                 <AnnouncementBar />
                 <FeaturesStrip />
 
-                <section className="py-12 md:py-24 relative overflow-hidden">
+                <section className="py-12 md:py-24 relative overflow-hidden" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 800px' }}>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                         {/* Section Header */}
@@ -132,8 +132,8 @@ export function Home() {
                                     key={category.id}
                                     ref={el => categoryCardsRef.current[index] = el}
                                     data-index={index}
-                                    className="min-w-[85vw] sm:min-w-[45vw] md:min-w-0 snap-center animate-fade-in-up"
-                                    style={{ animationDelay: `${index * 100}ms` }}
+                                    className={`min-w-[85vw] sm:min-w-[45vw] md:min-w-0 snap-center ${isMobile ? '' : 'animate-fade-in-up'}`}
+                                    style={isMobile ? {} : { animationDelay: `${index * 100}ms` }}
                                 >
                                     <CategoryCard category={category} isActive={isMobile && activeCategory === index} />
                                 </div>
@@ -145,10 +145,15 @@ export function Home() {
 
 
                 {/* Harvesting Now: Feature Carousel */}
-                <section id="harvesting-now" className="py-12 md:py-20 bg-brand-primary dark:bg-brand-primary/20 relative overflow-hidden text-white transition-colors duration-500">
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                    <div className="absolute -right-20 -top-20 w-96 h-96 bg-brand-accent/20 rounded-full blur-3xl animate-pulse"></div>
-                    <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-brand-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                <section id="harvesting-now" className="py-12 md:py-20 bg-brand-primary dark:bg-brand-primary/20 relative overflow-hidden text-white" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 600px' }}>
+                    {/* Decorative elements — DESKTOP ONLY (blur-3xl + animate-pulse destroys mobile GPU) */}
+                    {!isMobile && (
+                        <>
+                            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                            <div className="absolute -right-20 -top-20 w-96 h-96 bg-brand-accent/20 rounded-full blur-3xl animate-pulse"></div>
+                            <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-brand-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                        </>
+                    )}
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                         {/* Section Header for Harvesting Now */}
@@ -177,7 +182,8 @@ export function Home() {
                                             <img
                                                 src={getImageUrl(product.image)}
                                                 alt={product.name}
-                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                loading="lazy"
+                                                className="w-full h-full object-cover"
                                             />
                                             {/* Gradient Overlays */}
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
@@ -186,7 +192,7 @@ export function Home() {
 
                                         {/* Badge */}
                                         <div className="absolute top-6 left-6 z-10">
-                                            <span className="bg-white/95 backdrop-blur-md text-brand-primary font-bold px-4 py-2 rounded-full text-xs uppercase tracking-widest shadow-lg border border-brand-primary/10 flex items-center gap-2">
+                                            <span className="bg-white/95 text-brand-primary font-bold px-4 py-2 rounded-full text-xs uppercase tracking-widest shadow-lg border border-brand-primary/10 flex items-center gap-2">
                                                 <Leaf size={12} className="text-brand-accent" />
                                                 Harvesting Now
                                             </span>

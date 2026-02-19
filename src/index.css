@@ -197,3 +197,60 @@
         scrollbar-width: none;
     }
 }
+
+/* ======================================================================
+   MOBILE PERFORMANCE NUCLEAR FIX
+   Disables GPU-expensive effects on screens < 768px:
+   - blur-3xl (huge Gaussian blur = massive GPU compositing)
+   - backdrop-blur-* (requires separate compositing layer)
+   - animate-pulse, animate-bounce, animate-float (continuous repaints)
+   - transition-all (transitions EVERY property, causes unnecessary layout/paint)
+   - drop-shadow-* (expensive filter)
+   ====================================================================== */
+@media (max-width: 767px) {
+    /* Kill all large blurs — each blur-3xl element costs ~2-5ms per frame */
+    .blur-3xl,
+    .blur-2xl,
+    .blur-xl {
+        filter: none !important;
+        -webkit-filter: none !important;
+    }
+
+    /* Kill all backdrop blurs — forces separate compositing layer */
+    .backdrop-blur-3xl,
+    .backdrop-blur-2xl,
+    .backdrop-blur-xl,
+    .backdrop-blur-lg,
+    .backdrop-blur-md,
+    .backdrop-blur {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+    }
+
+    /* Kill continuous animations — each causes repaints every frame */
+    .animate-pulse,
+    .animate-bounce,
+    .animate-float,
+    .animate-spin-slow,
+    .animate-slow-zoom {
+        animation: none !important;
+    }
+
+    /* Replace transition-all with transition for colors only */
+    .transition-all {
+        transition-property: color, background-color, border-color, opacity !important;
+    }
+
+    /* Kill expensive text filters */
+    .drop-shadow-2xl,
+    .drop-shadow-xl,
+    .drop-shadow-lg {
+        filter: none !important;
+        -webkit-filter: none !important;
+    }
+
+    /* Optimize image rendering */
+    img {
+        content-visibility: auto;
+    }
+}

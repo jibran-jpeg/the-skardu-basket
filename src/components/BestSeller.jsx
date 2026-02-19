@@ -6,6 +6,13 @@ import { useProducts } from '../context/ProductContext';
 
 export function BestSeller() {
     const { products, categories } = useProducts();
+    const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // Get one best-selling representative from EACH category
     const allBestSellers = categories.map(category => {
@@ -19,12 +26,14 @@ export function BestSeller() {
     }).filter(Boolean); // Remote undefined if a category has no products
 
     return (
-        <section className="py-24 bg-gradient-to-b from-white to-[#ECEBE4] dark:from-[#1A1D23] dark:to-[#0B0C10] relative overflow-hidden">
-            {/* ... (background elements remain same) ... */}
-            <div className="absolute inset-0 opacity-20 dark:opacity-10">
-                <div className="absolute top-10 left-10 w-96 h-96 bg-brand-primary dark:bg-brand-accent rounded-full blur-3xl"></div>
-                <div className="absolute bottom-20 right-20 w-80 h-80 bg-brand-primary dark:bg-brand-accent rounded-full blur-3xl"></div>
-            </div>
+        <section className="py-24 bg-gradient-to-b from-white to-[#ECEBE4] dark:from-[#1A1D23] dark:to-[#0B0C10] relative overflow-hidden" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 800px' }}>
+            {/* Decorative blobs — DESKTOP ONLY (blur-3xl tanks mobile GPU) */}
+            {!isMobile && (
+                <div className="absolute inset-0 opacity-20 dark:opacity-10">
+                    <div className="absolute top-10 left-10 w-96 h-96 bg-brand-primary dark:bg-brand-accent rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-20 right-20 w-80 h-80 bg-brand-primary dark:bg-brand-accent rounded-full blur-3xl"></div>
+                </div>
+            )}
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* ... (Header section remains same) ... */}
@@ -115,9 +124,9 @@ export function BestSeller() {
                 <div className="mt-20 flex items-center justify-center gap-4">
                     <div className="h-px w-24 bg-gradient-to-r from-transparent to-brand-primary/50 dark:to-brand-accent/50"></div>
                     <div className="flex gap-2">
-                        <div className="w-2 h-2 bg-brand-primary dark:bg-brand-accent rounded-full animate-pulse"></div>
-                        <div className="w-2 h-2 bg-brand-primary/70 dark:bg-brand-accent/70 rounded-full animate-pulse" style={{ animationDelay: '150ms' }}></div>
-                        <div className="w-2 h-2 bg-brand-primary/40 dark:bg-brand-accent/40 rounded-full animate-pulse" style={{ animationDelay: '300ms' }}></div>
+                        <div className={`w-2 h-2 bg-brand-primary dark:bg-brand-accent rounded-full ${isMobile ? '' : 'animate-pulse'}`}></div>
+                        <div className={`w-2 h-2 bg-brand-primary/70 dark:bg-brand-accent/70 rounded-full ${isMobile ? '' : 'animate-pulse'}`} style={isMobile ? {} : { animationDelay: '150ms' }}></div>
+                        <div className={`w-2 h-2 bg-brand-primary/40 dark:bg-brand-accent/40 rounded-full ${isMobile ? '' : 'animate-pulse'}`} style={isMobile ? {} : { animationDelay: '300ms' }}></div>
                     </div>
                     <div className="h-px w-24 bg-gradient-to-l from-transparent to-brand-primary/50 dark:to-brand-accent/50"></div>
                 </div>

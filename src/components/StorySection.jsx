@@ -5,22 +5,32 @@ import { getImageUrl } from '../utils/imageHelper';
 
 export function StorySection() {
     const [imageError, setImageError] = React.useState(false);
+    const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     return (
-        <section className="py-12 md:py-24 relative overflow-hidden bg-white dark:bg-[#0B0C10] text-gray-600 dark:text-[#C5C6C7] transition-colors duration-300">
-            {/* Background Image with Overlay */}
-            <div className="absolute inset-0 z-0">
-                <img
-                    src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=3540&auto=format&fit=crop"
-                    onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.parentElement.style.backgroundColor = 'transparent'; // Let parent bg handle it
-                    }}
-                    className="w-full h-full object-cover opacity-15 dark:opacity-20"
-                    alt="Mountains Background"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white dark:from-[#0B0C10] dark:via-transparent dark:to-[#0B0C10]"></div>
-            </div>
+        <section className="py-12 md:py-24 relative overflow-hidden bg-white dark:bg-[#0B0C10] text-gray-600 dark:text-[#C5C6C7]" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 600px' }}>
+            {/* Background Image with Overlay — DESKTOP ONLY (saves mobile from downloading ~500KB external image) */}
+            {!isMobile && (
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=3540&auto=format&fit=crop"
+                        onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.parentElement.style.backgroundColor = 'transparent';
+                        }}
+                        className="w-full h-full object-cover opacity-15 dark:opacity-20"
+                        alt="Mountains Background"
+                        loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white dark:from-[#0B0C10] dark:via-transparent dark:to-[#0B0C10]"></div>
+                </div>
+            )}
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -34,7 +44,7 @@ export function StorySection() {
 
                         <h2 className="text-4xl md:text-6xl font-serif font-bold text-gray-900 dark:text-white mb-8 leading-tight">
                             Born in the <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-dark dark:from-brand-accent dark:to-white">Valley of Giants</span>
+                            <span className={isMobile ? 'text-brand-primary dark:text-brand-accent' : 'text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-dark dark:from-brand-accent dark:to-white'}>Valley of Giants</span>
                         </h2>
 
                         <p className="text-lg leading-relaxed mb-8 text-gray-700 dark:text-gray-400">
@@ -73,7 +83,8 @@ export function StorySection() {
                                     src={getImageUrl('/images/skardu_orchard_bloom.png')} // AI Generated Orchard Image
                                     alt="Majestic Skardu Landscape"
                                     onError={() => setImageError(true)}
-                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+                                    className="w-full h-full object-cover"
+                                    loading="lazy"
                                 />
                             ) : (
                                 <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-black flex items-center justify-center p-8 text-center">
@@ -88,9 +99,13 @@ export function StorySection() {
                                 <p className="text-white font-serif text-2xl italic">"Nature's masterpiece."</p>
                             </div>
                         </div>
-                        {/* Decorative Elements */}
-                        <div className="absolute -top-10 -right-10 w-64 h-64 bg-brand-primary/10 dark:bg-brand-accent/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
-                        <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -z-10"></div>
+                        {/* Decorative Elements — DESKTOP ONLY */}
+                        {!isMobile && (
+                            <>
+                                <div className="absolute -top-10 -right-10 w-64 h-64 bg-brand-primary/10 dark:bg-brand-accent/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
+                                <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -z-10"></div>
+                            </>
+                        )}
                     </div>
 
                 </div>
