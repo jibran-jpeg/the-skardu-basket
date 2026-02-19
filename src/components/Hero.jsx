@@ -1,56 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { storeConfig } from '../store.config';
 import { ChevronDown } from 'lucide-react';
 import { getImageUrl } from '../utils/imageHelper';
 
 export function Hero() {
-    // const bgRef = React.useRef(null); // Removed for CSS parallax
-    const contentRef = React.useRef(null);
-    const scrollLabelRef = React.useRef(null);
-
-    useEffect(() => {
-        let rafId;
-
-        const handleScroll = () => {
-            const scrollY = window.scrollY;
-
-            // Optimize: Only animate if visible/near top
-            if (scrollY > window.innerHeight) return;
-
-            rafId = requestAnimationFrame(() => {
-                // Parallax Background - CSS handled now (fixed position)
-
-                // Content Effects (Fade & Scale)
-                if (contentRef.current) {
-                    const opacity = Math.max(1 - scrollY / 500, 0);
-                    const scale = Math.max(1 - scrollY / 2000, 0.9);
-                    const translateY = scrollY * 0.3;
-
-                    // Consistent translation for both mobile and desktop
-                    const effectiveTranslateY = translateY;
-
-                    contentRef.current.style.opacity = opacity;
-                    contentRef.current.style.transform = `translate3d(0, ${effectiveTranslateY}px, 0) scale(${scale})`;
-                }
-
-                // Scroll Label Fade
-                if (scrollLabelRef.current) {
-                    scrollLabelRef.current.style.opacity = Math.max(1 - scrollY / 300, 0);
-                }
-            });
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            cancelAnimationFrame(rafId);
-        };
-    }, []);
-
     return (
         <div className="relative w-full h-[100dvh] overflow-hidden bg-gray-900">
-            {/* Background Image with Parallax */}
             {/* Background Image with CSS Fixed Parallax */}
             <div className="fixed inset-0 w-full h-[100dvh] z-0">
                 <img
@@ -65,17 +21,14 @@ export function Hero() {
             {/* Enhanced Gradient Overlay - Fixed with image */}
             <div className="fixed inset-0 h-[100dvh] bg-gradient-to-b from-black/20 via-black/10 to-black/40 pointer-events-none z-0"></div>
 
-            {/* Decorative corner elements - Static to reduce paint cost or include in contentRef if needed to fade */}
+            {/* Decorative corner elements */}
             <div className="absolute top-0 left-0 w-16 h-16 md:w-32 md:h-32 border-t-2 border-l-2 border-white/20 pointer-events-none"></div>
             <div className="absolute top-0 right-0 w-16 h-16 md:w-32 md:h-32 border-t-2 border-r-2 border-white/20 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 w-16 h-16 md:w-32 md:h-32 border-b-2 border-l-2 border-white/20 pointer-events-none"></div>
             <div className="absolute bottom-0 right-0 w-16 h-16 md:w-32 md:h-32 border-b-2 border-r-2 border-white/20 pointer-events-none"></div>
 
-            {/* Content with Scroll Effects */}
-            <div
-                ref={contentRef}
-                className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 will-change-transform"
-            >
+            {/* Content with Scroll Effects - Static for smoother mobile experience */}
+            <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
                 {/* Top Badge */}
                 <div className="mb-4 md:mb-6 animate-fade-in-down">
                     <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-1.5 md:py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/30">
@@ -120,17 +73,13 @@ export function Hero() {
                     </span>
                 </Link>
 
-                {/* Scroll indicator - Relative to ensure consistent spacing */}
-                <div
-                    ref={scrollLabelRef}
-                    className="mt-12 md:absolute md:bottom-10 md:left-0 md:w-full flex justify-center z-40 will-change-opacity md:mt-0"
-                >
+                {/* Scroll indicator */}
+                <div className="mt-12 md:absolute md:bottom-10 md:left-0 md:w-full flex justify-center z-40 md:mt-0">
                     <div className="flex flex-col items-center gap-2 text-white/70 animate-bounce">
                         <span className="text-xs uppercase tracking-wider">Scroll</span>
                         <ChevronDown className="w-5 h-5" />
                     </div>
                 </div>
-
             </div>
         </div>
     );
