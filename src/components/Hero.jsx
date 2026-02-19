@@ -1,34 +1,80 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { storeConfig } from '../store.config';
 import { ChevronDown } from 'lucide-react';
 import { getImageUrl } from '../utils/imageHelper';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 export function Hero() {
+    const containerRef = useRef(null);
+
+    // 1. SCROLL PHYSICS
+    // Track scroll progress relative to this container
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end start"]
+    });
+
+    // 2. SPRING SMOOTHING
+    // Wrap the raw scroll value in a spring to eliminate jitter/stutter.
+    // Damping: Strength of opposing force (higher = less oscillation).
+    // Stiffness: Speed of movement (higher = snappier).
+    const smoothProgress = useSpring(scrollYProgress, {
+        damping: 15,
+        stiffness: 100,
+        mass: 0.5
+    });
+
+    // 3. TRANSFORMATIONS
+    // Map the smooth progress to specific animation values.
+    const y = useTransform(smoothProgress, [0, 1], ["0%", "50%"]); // Parallax: moves at half speed
+    const scale = useTransform(smoothProgress, [0, 1], [1, 1.15]); // Zoom: scales up slightly
+    const opacity = useTransform(smoothProgress, [0, 0.5], [1, 0]); // Fade: disappears halfway through
+
     return (
-        <div className="relative w-full h-[100dvh] overflow-hidden bg-gray-900">
-            {/* Background Image with CSS Fixed Parallax */}
-            <div className="fixed inset-0 w-full h-[100dvh] z-0">
+        <div ref={containerRef} className="relative w-full h-[100dvh] overflow-hidden bg-gray-900">
+            {/* 
+                GPU ACCELERATION & LAYER ISOLATION 
+                - will-change-transform: Hints browser to promote to a new layer.
+                - transform-gpu: Ensures 3D transform usage for hardware acceleration.
+            */}
+            <motion.div
+                style={{ y, scale }}
+                className="absolute inset-0 w-full h-[120%] will-change-transform transform-gpu"
+            >
                 <img
                     src={getImageUrl(storeConfig.heroImage)}
                     alt="Skardu Valley"
                     fetchpriority="high"
                     decoding="async"
-                    className="w-full h-full object-cover object-center scale-105 animate-slow-zoom"
+                    className="w-full h-full object-cover object-center"
                 />
+            </motion.div>
+
+            {/* Gradient Overlay - Moves with background for consistency */}
+            <motion.div
+                style={{ y }}
+                className="absolute inset-0 h-[120%] bg-gradient-to-b from-black/20 via-black/10 to-black/40 pointer-events-none"
+            />
+
+            {/* Decorative Static Elements - Isolated from scaling layer */}
+            <div className="absolute inset-0 pointer-events-none z-10">
+                <div className="absolute top-0 left-0 w-16 h-16 md:w-32 md:h-32 border-t-2 border-l-2 border-white/20"></div>
+                <div className="absolute top-0 right-0 w-16 h-16 md:w-32 md:h-32 border-t-2 border-r-2 border-white/20"></div>
+                <div className="absolute bottom-0 left-0 w-16 h-16 md:w-32 md:h-32 border-b-2 border-l-2 border-white/20"></div>
+                <div className="absolute bottom-0 right-0 w-16 h-16 md:w-32 md:h-32 border-b-2 border-r-2 border-white/20"></div>
             </div>
 
-            {/* Enhanced Gradient Overlay - Fixed with image */}
-            <div className="fixed inset-0 h-[100dvh] bg-gradient-to-b from-black/20 via-black/10 to-black/40 pointer-events-none z-0"></div>
-
-            {/* Decorative corner elements */}
-            <div className="absolute top-0 left-0 w-16 h-16 md:w-32 md:h-32 border-t-2 border-l-2 border-white/20 pointer-events-none"></div>
-            <div className="absolute top-0 right-0 w-16 h-16 md:w-32 md:h-32 border-t-2 border-r-2 border-white/20 pointer-events-none"></div>
-            <div className="absolute bottom-0 left-0 w-16 h-16 md:w-32 md:h-32 border-b-2 border-l-2 border-white/20 pointer-events-none"></div>
-            <div className="absolute bottom-0 right-0 w-16 h-16 md:w-32 md:h-32 border-b-2 border-r-2 border-white/20 pointer-events-none"></div>
-
-            {/* Content with Scroll Effects - Static for smoother mobile experience */}
-            <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
+            {/* 
+                TEXT LAYER ISOLATION 
+                - Isolated from the scaling/moving background to prevent layout thrashing.
+                - Uses its own opacity transform but NO scale/parallax to keep it sharp and cheap to paint.
+                - backface-visibility-hidden: Hack to ensure layer promotion.
+            */}
+            <motion.div
+                style={{ opacity }}
+                className="relative z-20 h-full flex flex-col justify-center items-center text-center px-4 backface-visibility-hidden"
+            >
                 {/* Top Badge */}
                 <div className="mb-4 md:mb-6 animate-fade-in-down">
                     <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-1.5 md:py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/30">
@@ -56,7 +102,7 @@ export function Hero() {
                     Experience pure, hand-picked treasures from the pristine valleys of Skardu
                 </p>
 
-                {/* CTA Button with GREEN hover */}
+                {/* CTA Button */}
                 <Link
                     to="/products"
                     className="group relative px-5 py-2 md:px-10 md:py-5 bg-white text-gray-900 hover:bg-brand-primary hover:text-white transition-all duration-500 uppercase tracking-[0.1em] md:tracking-[0.2em] text-[10px] md:text-sm font-bold shadow-2xl rounded-full overflow-hidden animate-fade-in-up border-2 border-white hover:border-brand-primary hover:scale-105"
@@ -80,7 +126,7 @@ export function Hero() {
                         <ChevronDown className="w-5 h-5" />
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 }
