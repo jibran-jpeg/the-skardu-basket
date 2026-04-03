@@ -5,6 +5,7 @@ import { useOrders } from '../context/OrderContext';
 import confetti from 'canvas-confetti';
 import { CheckCircle, ShieldCheck, Truck, Package, ArrowRight, AlertCircle, CreditCard, ShoppingBag } from 'lucide-react';
 import { SEO } from '../components/SEO';
+import { getImageUrl } from '../utils/imageHelper';
 
 export function Checkout() {
     const { cartItems, getCartTotal, clearCart } = useContext(CartContext);
@@ -399,7 +400,7 @@ export function Checkout() {
                                     {cartItems.map((item) => (
                                         <li key={item.id} className="flex py-4">
                                             <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 dark:border-gray-700 bg-gray-50">
-                                                <img src={item.image} alt={item.name} className="h-full w-full object-cover object-center" />
+                                                <img src={getImageUrl(item.image)} alt={item.name} className="h-full w-full object-cover object-center" />
                                             </div>
                                             <div className="ml-4 flex flex-1 flex-col">
                                                 <div>
